@@ -5,6 +5,7 @@ const Header = () => {
     Linking.openURL("https://www.linkedin.com/company/coco-cia");
   };
 
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
