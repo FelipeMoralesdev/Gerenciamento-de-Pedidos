@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Modal } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Modal, Image } from 'react-native';
 
 export default function Body() {
   const [cliente, setCliente] = useState(''); 
@@ -84,7 +84,9 @@ export default function Body() {
   };
 
   return (
+
     <View style={styles.container}>
+      
       <View style={styles.linha}>
         <Text style={styles.label}>Cliente</Text>
         <TextInput
@@ -207,7 +209,12 @@ export default function Body() {
         />
       </View>
 
+     
+
     </View>
+
+
+
 
   );
 }
@@ -282,12 +289,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  fechar: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    padding: 10,
   },
   modal: {
     flex: 1,
