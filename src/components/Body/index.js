@@ -223,10 +223,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFCC4D',
     padding: 10,
-    width: '90%',
-    marginBottom: 650,
+    width: '100%',
     borderRadius: 5,
-    marginTop: 100,
+
   },
   linha: {
     flexDirection: 'row',
@@ -247,11 +246,11 @@ const styles = StyleSheet.create({
   },  
     inputDesconto: {
     backgroundColor: '#fff',
-    flex: 3,
+    flex: 2,
     height: 40,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginRight: 60,
+    marginRight: 80,
   },
 
   botao: {
@@ -276,19 +275,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 10,
-  },
-  popup: {
-    position: 'absolute',
-    backgroundColor: '#fff',
-    width: '80%',
-    height: '40%',
-    borderRadius: 10,
-    padding: 20,
-    top: '30%',
-    left: '10%',
-    zIndex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   modal: {
     flex: 1,

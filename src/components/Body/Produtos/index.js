@@ -49,6 +49,7 @@ export default function Produtos() {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 10,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-start',

@@ -8,10 +8,11 @@ import Produtos from './src/components/Body/Produtos';
 export default function App() {
   return (
     <View style={styles.container}>
+      <ScrollView style={styles.scroll}>
       <Header/>
-      
-      <ScrollView>
       <Body/>
+      <Produtos/>
+      <Produtos/>
       <Produtos/>
       </ScrollView>
       
@@ -31,4 +32,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 0,
   },
+
 });

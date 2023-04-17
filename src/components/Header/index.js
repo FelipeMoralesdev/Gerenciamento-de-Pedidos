@@ -7,7 +7,7 @@ const Header = () => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <View style={styles.header}>
         <Text style={styles.titulo}>Gerenciamento de Pedidos</Text>
         <TouchableOpacity onPress={handlePress}>
@@ -19,9 +19,7 @@ const Header = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+
   header:{
     flexDirection: "row",
     height: 80,
