@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet,  } from 'react-native';
 
-export default function Produtos() {
+export default function Produtos2() {
     return (
         
         <View style={styles.container}>
             <Image 
             style={styles.imagem} 
-            source={require('../../../../assets/fotos/pd17-coco-flocado-queimado-100g-1.png')}
+            source={require('../../../../assets/fotos/pd2-coco-flocado-umido-e-adocado-1kg-1.png')}
             
             
             />

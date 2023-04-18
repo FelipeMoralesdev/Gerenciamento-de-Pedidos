@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Header from './src/components/Header';
 import Body from './src/components/Body';
 import Produtos from './src/components/Body/Produtos';
+import Produtos2 from './src/components/Body/Produtos2';
 
 
 export default function App() {
@@ -12,7 +13,7 @@ export default function App() {
       <Header/>
       <Body/>
       <Produtos/>
-      <Produtos/>
+      <Produtos2/>
       <Produtos/>
       </ScrollView>
       
