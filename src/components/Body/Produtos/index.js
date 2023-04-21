@@ -1,75 +1,113 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, StyleSheet,  } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet } from 'react-native';
 
-export default function Produtos() {
-    return (
-        
-        <View style={styles.container}>
-            <Image 
-            style={styles.imagem} 
-            source={require('../../../../assets/fotos/pd17-coco-flocado-queimado-100g-1.png')}
-            
-            
-            />
+const produtos = [
+  {
+    id: 1,
+    imagem: require('../../../../assets/fotos/pd17-coco-flocado-queimado-100g-1.png'),
+    titulo: 'Coco Flocado',
+    preco: 20,
+    unidade: '100g',
+  },
+  {
+    id: 2,
+    imagem: require('../../../../assets/fotos/pd17-coco-flocado-queimado-100g-1.png'),
+    titulo: 'Coco Flocado',
+    preco: 20,
+    unidade: '100g',
+  },
+  {
+    id: 3,
+    imagem: require('../../../../assets/fotos/pd17-coco-flocado-queimado-100g-1.png'),
+    titulo: 'Coco Flocado',
+    preco: 20,
+    unidade: '100g',
+  },
 
-            <View>
-                <View style={styles.titulo}>
-                    <Text> Coco Flocado</Text>
-                </View>
+];
 
-                <View style={styles.linha}>
-                    <Text>Preço:</Text>
+export default function Produtos({ imagem, titulo, preco, unidade }) {
+  const [quantidade, setQuantidade] = useState('0');
 
-                </View>
+  console.log(imagem, titulo, preco, unidade);
+  const handleQuantidadeChange = (text) => {
+    const parsedValue = parseInt(text, 10);
 
-                <View style={styles.linha}>
-                    <Text>Quantidade:</Text>
-                    <TextInput></TextInput>
-                </View>
+    if (!isNaN(parsedValue)) {
+      setQuantidade(parsedValue.toString());
+    }
+  };
 
-                <View style={styles.linha}>
-                    <Text>Unidade:</Text>
+  const valorTotal = parseFloat(quantidade) * preco;
 
-                </View>
+  return (
+    <View style={styles.container}>
+      <Image style={styles.imagem} source={imagem} />
 
-                <View style={styles.linha}>
-                    <Text>Valor total: </Text>
-
-                </View>
-
-
-
-
-            </View>
+      <View>
+        <View style={styles.titulo}>
+          <Text>{titulo}</Text>
         </View>
 
-    );
+        <View style={styles.linha}>
+          <Text>Preço: R$ {preco}</Text>
+        </View>
 
+        <View style={styles.linha}>
+          <Text>Quantidade:</Text>
+          <TextInput
+            value={quantidade}
+            onChangeText={handleQuantidadeChange}
+            keyboardType="numeric"
+          />
+        </View>
+
+        <View style={styles.linha}>
+          <Text>Unidade: {unidade}</Text>
+        </View>
+
+        <View style={styles.linha}>
+          <Text>Valor total: R$ {valorTotal.toFixed(2)}</Text>
+        </View>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 10,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-    },
-    info: {
-      flex: 1,
-      flexDirection: 'column',
-      marginLeft: 10,
-    },
-    linha: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginVertical: 5,
-    },
-    titulo: {
-      marginVertical: 5,
-    },
-    imagem: {
-        width: '50%',
-        aspectRatio: 1,
-        resizeMode: "contain",
-    },
-  });
+  container: {
+    marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  linha: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  titulo: {
+    marginVertical: 5,
+  },
+  imagem: {
+    width: '50%',
+    aspectRatio: 1,
+    resizeMode: 'contain',
+  },
+});
+
+export function ListaDeProdutos() {
+  return (
+    <View>
+      {produtos.map((produto) => (
+        <Produtos
+          key={produtos.id}
+          imagem={produtos.imagem}
+          titulo={produtos.titulo}
+          preco={produtos.preco}
+          unidade={produtos.unidade}
+        />
+      ))}
+    </View>
+  );
+}

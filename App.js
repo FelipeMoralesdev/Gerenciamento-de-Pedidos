@@ -13,10 +13,8 @@ export default function App() {
       <ScrollView style={styles.scroll}>
         <Header/>
         <Body/>
-        <Produtos/>
         <Produtos2/>
-        <Produtos/>
-        <Footer/>
+
       </ScrollView>
       <Footer/>
 
@@ -38,4 +36,5 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
 
+  
 });
