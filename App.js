@@ -4,6 +4,7 @@ import Header from './src/components/Header';
 import Body from './src/components/Body';
 import Footer from './src/components/Footer';
 import Produtos from './src/components/Body/Produtos';
+import ListaDeProdutos from './src/components/Body/Produtos';
 import Produtos2 from './src/components/Body/Produtos2';
 
 
@@ -14,6 +15,7 @@ export default function App() {
         <Header/>
         <Body/>
         <Produtos2/>
+
 
       </ScrollView>
       <Footer/>

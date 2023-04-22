@@ -9,27 +9,11 @@ const produtos = [
     preco: 20,
     unidade: '100g',
   },
-  {
-    id: 2,
-    imagem: require('../../../../assets/fotos/pd17-coco-flocado-queimado-100g-1.png'),
-    titulo: 'Coco Flocado',
-    preco: 20,
-    unidade: '100g',
-  },
-  {
-    id: 3,
-    imagem: require('../../../../assets/fotos/pd17-coco-flocado-queimado-100g-1.png'),
-    titulo: 'Coco Flocado',
-    preco: 20,
-    unidade: '100g',
-  },
-
 ];
 
 export default function Produtos({ imagem, titulo, preco, unidade }) {
   const [quantidade, setQuantidade] = useState('0');
 
-  console.log(imagem, titulo, preco, unidade);
   const handleQuantidadeChange = (text) => {
     const parsedValue = parseInt(text, 10);
 
@@ -73,7 +57,21 @@ export default function Produtos({ imagem, titulo, preco, unidade }) {
     </View>
   );
 }
-
+export function ListaDeProdutos() {
+  return (
+    <View>
+      {produtos.map((produto) => (
+        <Produtos
+          key={produto.id}
+          imagem={produto.imagem}
+          titulo={produto.titulo}
+          preco={produto.preco}
+          unidade={produto.unidade}
+        />
+      ))}
+    </View>
+  );
+}
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
@@ -96,18 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export function ListaDeProdutos() {
-  return (
-    <View>
-      {produtos.map((produto) => (
-        <Produtos
-          key={produtos.id}
-          imagem={produtos.imagem}
-          titulo={produtos.titulo}
-          preco={produtos.preco}
-          unidade={produtos.unidade}
-        />
-      ))}
-    </View>
-  );
-}
+
