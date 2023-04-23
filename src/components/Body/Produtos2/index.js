@@ -17,9 +17,17 @@ export default function Produtos2() {
         imagem: require('../../../../assets/fotos/pd7-coco-ralado-medio-1kg-1.png'),
         quantidade: 0,
       },
-
+      {
+        nome: 'Coco Ralado Médio',
+        preco: 5.5,
+        unidade: 'kg',
+        imagem: require('../../../../assets/fotos/pd7-coco-ralado-medio-1kg-1.png'),
+        quantidade: 0,
+      },
     // adicione mais produtos aqui
   ]);
+
+  const [faturamentoTotal, setFaturamentoTotal] = useState(0);
 
   const renderProduto = (produto, index) => {
     const [quantidade, setQuantidade] = useState(produto.quantidade);
@@ -27,6 +35,9 @@ export default function Produtos2() {
     const handleQuantidadeChange = (text) => {
       const novaQuantidade = parseInt(text);
       setQuantidade(novaQuantidade);
+
+
+      setFaturamentoTotal((faturamentoAnterior) => faturamentoAnterior + produto.preco * novaQuantidade);
     };
 
     const valorTotal = produto.preco * quantidade;
@@ -69,9 +80,16 @@ export default function Produtos2() {
   return (
     <View>
       {produtos.map((produto, index) => renderProduto(produto, index))}
+      <Text>Faturamento total: R$ {faturamentoTotal.toFixed(2)}</Text>
     </View>
   );
 }
+
+
+
+
+
+
 
 const styles = StyleSheet.create({
   container: {

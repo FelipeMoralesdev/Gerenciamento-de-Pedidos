@@ -1,10 +1,11 @@
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 
+
 export default function Footer() {
   return (
     <View style={styles.container}>
       <View>
-        <Text>Faturamento total: R$</Text>
+        <Text>Faturamento total: R$  </Text>
       </View>
       <View>
         <Text>Pedido aprovado?</Text>
