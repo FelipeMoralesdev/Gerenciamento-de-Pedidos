@@ -1,11 +1,12 @@
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
+import { faturamento } from "../Body/Produtos2";
 
 
 export default function Footer() {
   return (
     <View style={styles.container}>
       <View>
-        <Text>Faturamento total: R$  </Text>
+        <Text>Faturamento total: R$ {faturamento.total}</Text>
       </View>
       <View>
         <Text>Pedido aprovado?</Text>

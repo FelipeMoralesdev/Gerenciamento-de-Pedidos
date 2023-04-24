@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet } from 'react-native';
 
+export const faturamento = {
+  total: 0,
+};
+
 export default function Produtos2() {
   const [produtos, setProdutos] = useState([
     {
@@ -17,13 +21,6 @@ export default function Produtos2() {
         imagem: require('../../../../assets/fotos/pd7-coco-ralado-medio-1kg-1.png'),
         quantidade: 0,
       },
-      {
-        nome: 'Coco Ralado Médio',
-        preco: 5.5,
-        unidade: 'kg',
-        imagem: require('../../../../assets/fotos/pd7-coco-ralado-medio-1kg-1.png'),
-        quantidade: 0,
-      },
     // adicione mais produtos aqui
   ]);
 
@@ -32,12 +29,16 @@ export default function Produtos2() {
   const renderProduto = (produto, index) => {
     const [quantidade, setQuantidade] = useState(produto.quantidade);
 
+    
+
     const handleQuantidadeChange = (text) => {
       const novaQuantidade = parseInt(text);
+      const quantidadeAnterior = quantidade;
       setQuantidade(novaQuantidade);
-
-
-      setFaturamentoTotal((faturamentoAnterior) => faturamentoAnterior + produto.preco * novaQuantidade);
+    
+      const diferencaQuantidade = novaQuantidade - quantidadeAnterior;
+      faturamento.total += produto.preco * diferencaQuantidade;
+    
     };
 
     const valorTotal = produto.preco * quantidade;
@@ -80,11 +81,10 @@ export default function Produtos2() {
   return (
     <View>
       {produtos.map((produto, index) => renderProduto(produto, index))}
-      <Text>Faturamento total: R$ {faturamentoTotal.toFixed(2)}</Text>
+      <Text>Faturamento total: R$ {faturamento.total.toFixed(2)}</Text>
     </View>
   );
 }
-
 
 
 
