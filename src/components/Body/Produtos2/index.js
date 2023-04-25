@@ -1,47 +1,42 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet } from 'react-native';
 
-export const faturamento = {
-  total: 0,
-};
+const produtosIniciais = [
+  {
+    nome: 'Coco Flocado',
+    preco: 10.5,
+    unidade: 'kg',
+    imagem: require('../../../../assets/fotos/pd2-coco-flocado-umido-e-adocado-1kg-1.png'),
+    quantidade: 0,
+  },
+  {
+    nome: 'Coco Ralado Médio',
+    preco: 5.5,
+    unidade: 'kg',
+    imagem: require('../../../../assets/fotos/pd7-coco-ralado-medio-1kg-1.png'),
+    quantidade: 0,
+  },
+  // adicione mais produtos aqui
+];
 
 export default function Produtos2() {
-  const [produtos, setProdutos] = useState([
-    {
-      nome: 'Coco Flocado',
-      preco: 10.5,
-      unidade: 'kg',
-      imagem: require('../../../../assets/fotos/pd2-coco-flocado-umido-e-adocado-1kg-1.png'),
-      quantidade: 0,
-    },
-    {
-        nome: 'Coco Ralado Médio',
-        preco: 5.5,
-        unidade: 'kg',
-        imagem: require('../../../../assets/fotos/pd7-coco-ralado-medio-1kg-1.png'),
-        quantidade: 0,
-      },
-    // adicione mais produtos aqui
-  ]);
-
+  const [produtos, setProdutos] = useState(produtosIniciais);
   const [faturamentoTotal, setFaturamentoTotal] = useState(0);
 
+  const handleQuantidadeChange = (index, text) => {
+    const novaQuantidade = parseInt(text);
+    const novosProdutos = [...produtos];
+    novosProdutos[index].quantidade = novaQuantidade;
+    setProdutos(novosProdutos);
+    const novoFaturamentoTotal = novosProdutos.reduce(
+      (total, produto) => total + (produto.preco * produto.quantidade),
+      0
+    );
+    setFaturamentoTotal(novoFaturamentoTotal);
+  };
+
   const renderProduto = (produto, index) => {
-    const [quantidade, setQuantidade] = useState(produto.quantidade);
-
-    
-
-    const handleQuantidadeChange = (text) => {
-      const novaQuantidade = parseInt(text);
-      const quantidadeAnterior = quantidade;
-      setQuantidade(novaQuantidade);
-    
-      const diferencaQuantidade = novaQuantidade - quantidadeAnterior;
-      faturamento.total += produto.preco * diferencaQuantidade;
-    
-    };
-
-    const valorTotal = produto.preco * quantidade;
+    const valorTotal = produto.preco * produto.quantidade;
 
     return (
       <View style={styles.container} key={index}>
@@ -60,9 +55,9 @@ export default function Produtos2() {
             <Text>Quantidade:</Text>
             <TextInput
               style={styles.inputQuantidade}
-              value={quantidade.toString()}
+              value={produto.quantidade.toString()}
               keyboardType="numeric"
-              onChangeText={handleQuantidadeChange}
+              onChangeText={(text) => handleQuantidadeChange(index, text)}
             />
           </View>
 
@@ -80,11 +75,14 @@ export default function Produtos2() {
 
   return (
     <View>
+      <Text>Faturamento total: R$ {faturamentoTotal.toFixed(2)}</Text>
       {produtos.map((produto, index) => renderProduto(produto, index))}
-      <Text>Faturamento total: R$ {faturamento.total.toFixed(2)}</Text>
     </View>
   );
 }
+
+
+
 
 
 
