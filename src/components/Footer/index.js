@@ -2,11 +2,13 @@ import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import Produtos2, {faturamentoTotal} from "../Body/Produtos2";
 
 
-export default function Footer() {
+export default function Footer(props) {
+  
+
   return (
     <View style={styles.container}>
       <View>
-        <Text>Faturamento total: R$ {faturamentoTotal} </Text>
+        <Text>Faturamento total: R$ {props.faturamentoTotal} </Text>
       </View>
       <View>
         <Text>Pedido aprovado?</Text>

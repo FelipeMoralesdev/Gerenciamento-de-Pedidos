@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet } from 'react-native';
+import Footer from '../../Footer';
 
 const produtosIniciais = [
   {
@@ -75,8 +76,8 @@ export default function Produtos2() {
 
   return (
     <View>
-      <Text>Faturamento total: R$ {faturamentoTotal.toFixed(2)}</Text>
       {produtos.map((produto, index) => renderProduto(produto, index))}
+      <Footer faturamentoTotal={faturamentoTotal.toFixed(2)}/>
     </View>
   );
 }
