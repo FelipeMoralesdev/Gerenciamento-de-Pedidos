@@ -1,5 +1,4 @@
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
-import Produtos2, {faturamentoTotal} from "../Body/Produtos2";
 
 
 export default function Footer(props) {
