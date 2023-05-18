@@ -30,12 +30,13 @@ export default function Footer(props) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
+    width: "120%",
     backgroundColor: "#fff",
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 10,
     marginBottom: 50,
+    marginLeft: "-10%",
   },
   buttonsContainer: {
     flexDirection: "row",
