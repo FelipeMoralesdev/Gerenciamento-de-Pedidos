@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet} from 'react-native';
 import Footer from '../../Footer';
 
 const produtosIniciais = [
@@ -200,14 +200,18 @@ const produtosIniciais = [
 export default function Produtos2() {
   const [produtos, setProdutos] = useState(produtosIniciais);
   const [faturamentoTotal, setFaturamentoTotal] = useState(0);
+  const [exibirCarrinho, setExibirCarrinho] = useState(false); 
 
   const handleQuantidadeChange = (index, text) => {
+    // Atualizar a quantidade do produto selecionado
     const novaQuantidade = parseInt(text);
     const novosProdutos = [...produtos];
     novosProdutos[index].quantidade = novaQuantidade;
     setProdutos(novosProdutos);
+
+    // Calcular o novo faturamento total
     const novoFaturamentoTotal = novosProdutos.reduce(
-      (total, produto) => total + (produto.preco * produto.quantidade),
+      (total, produto) => total + produto.preco * produto.quantidade,
       0
     );
     setFaturamentoTotal(novoFaturamentoTotal);
@@ -221,7 +225,7 @@ export default function Produtos2() {
         <Image style={styles.imagem} source={produto.imagem} />
 
         <View style={styles.info}>
-          <View >
+          <View>
             <Text style={styles.titulo}>{produto.nome}</Text>
           </View>
 
@@ -251,20 +255,37 @@ export default function Produtos2() {
     );
   };
 
+  const renderCarrinho = () => {
+    return (
+      <View style={{ flex: 1 }}>
+        {produtos
+          .filter((produto) => produto.quantidade > 0) // Filtrar apenas os produtos com quantidade maior que zero
+          .map((produto, index) => renderProduto(produto, index))}
+        <Footer faturamentoTotal={faturamentoTotal.toFixed(2)} />
+      </View>
+    );
+  };
+
+  const handleVerCarrinho = () => {
+    setExibirCarrinho(true);
+  };
+
   return (
     <View style={{ flex: 1 }}>
-      {produtos.map((produto, index) => renderProduto(produto, index))}
-      <Footer faturamentoTotal={faturamentoTotal.toFixed(2)}/>
+      {exibirCarrinho ? (
+        renderCarrinho() 
+      ) : (
+        <View>
+          {produtos.map((produto, index) => renderProduto(produto, index))}
+          <Footer 
+          faturamentoTotal={faturamentoTotal.toFixed(2)} 
+          onVerCarrinho={handleVerCarrinho}
+          />
+        </View>
+      )}
     </View>
   );
 }
-
-
-
-
-
-
-
 
 
 const styles = StyleSheet.create({

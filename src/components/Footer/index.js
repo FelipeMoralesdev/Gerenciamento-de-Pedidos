@@ -16,7 +16,7 @@ export default function Footer(props) {
         <Text>Peso total:</Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={props.onVerCarrinho}>
           <Text style={styles.buttonText}>Ver Carrinho</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button2}>
