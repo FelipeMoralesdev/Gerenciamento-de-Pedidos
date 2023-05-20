@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, StyleSheet} from 'react-native';
-import Footer from '../../Footer';
+import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 const produtosIniciais = [
   {
@@ -261,13 +260,12 @@ export default function Produtos2() {
         {produtos
           .filter((produto) => produto.quantidade > 0) // Filtrar apenas os produtos com quantidade maior que zero
           .map((produto, index) => renderProduto(produto, index))}
-        <Footer faturamentoTotal={faturamentoTotal.toFixed(2)} />
       </View>
     );
   };
 
   const handleVerCarrinho = () => {
-    setExibirCarrinho(true);
+    setExibirCarrinho(!exibirCarrinho);
   };
 
   return (
@@ -277,12 +275,28 @@ export default function Produtos2() {
       ) : (
         <View>
           {produtos.map((produto, index) => renderProduto(produto, index))}
-          <Footer 
-          faturamentoTotal={faturamentoTotal.toFixed(2)} 
-          onVerCarrinho={handleVerCarrinho}
-          />
         </View>
       )}
+        <View style={styles.containerFooter}>
+        <View>
+            <Text>Faturamento total: R$ {faturamentoTotal.toFixed(2)} </Text>
+          </View>
+          <View>
+            <Text>Pedido aprovado?</Text>
+          </View>
+          <View>
+            <Text>Peso total:</Text>
+          </View>
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity style={styles.button} onPress={handleVerCarrinho}>
+              <Text style={styles.buttonText}>{exibirCarrinho ? 'Continuar Compra' : 'Ver Carrinho'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button2}>
+              <Text style={styles.buttonText}>Fechar Pedido</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+          
     </View>
   );
 }
@@ -321,5 +335,39 @@ const styles = StyleSheet.create({
     padding: 5,
     width: 50,
     textAlign: 'center',
+  },
+  containerFooter: {
+    width: "100%",
+    backgroundColor: "#fff",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 10,
+    marginBottom: 50,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "80%",
+    paddingTop: 5,
+  },
+  button: {
+    backgroundColor: "#FFCC4D",
+    height: 50,
+    width: "48%",
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button2: {
+    backgroundColor: "#005d22ff",
+    height: 50,
+    width: "48%",
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#FFF",
+    fontWeight: "bold",
   },
 });

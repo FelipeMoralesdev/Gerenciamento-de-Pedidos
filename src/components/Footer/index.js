@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 
 export default function Footer(props) {
@@ -28,7 +28,7 @@ export default function Footer(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerFooter: {
     width: "120%",
     backgroundColor: "#fff",
     justifyContent: "space-between",
