@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '90%',
   },
   info: {
     flex: 1,

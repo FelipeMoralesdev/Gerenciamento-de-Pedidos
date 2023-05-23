@@ -223,9 +223,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFCC4D',
     padding: 10,
-    width: '100%',
+    width: '90%',
     borderRadius: 5,
-
+    alignSelf: 'center',
   },
   linha: {
     flexDirection: 'row',
