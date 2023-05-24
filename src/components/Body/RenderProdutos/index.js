@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import produtosIniciais from '../ListProdutos';
-
 
 export default function RenderProdutos() {
   const [produtos, setProdutos] = useState(produtosIniciais);
   const [faturamentoTotal, setFaturamentoTotal] = useState(0);
-  const [exibirCarrinho, setExibirCarrinho] = useState(false); 
+  const [exibirCarrinho, setExibirCarrinho] = useState(false);
 
-  const handleQuantidadeChange = (index, text) => {
+  const handleQuantidadeChange = (id, text) => {
     // Atualizar a quantidade do produto selecionado
     const novaQuantidade = parseInt(text);
-    const novosProdutos = [...produtos];
-    novosProdutos[index].quantidade = novaQuantidade;
+    const novosProdutos = produtos.map((produto) => {
+      if (produto.id === id) {
+        return { ...produto, quantidade: novaQuantidade };
+      }
+      return produto;
+    });
     setProdutos(novosProdutos);
 
     // Calcular o novo faturamento total
@@ -23,11 +26,11 @@ export default function RenderProdutos() {
     setFaturamentoTotal(novoFaturamentoTotal);
   };
 
-  const renderProduto = (produto, index) => {
+  const renderProduto = (produto) => {
     const valorTotal = produto.preco * produto.quantidade;
 
     return (
-      <View style={styles.container} key={index}>
+      <View style={styles.container} key={produto.id}>
         <Image style={styles.imagem} source={produto.imagem} />
 
         <View style={styles.info}>
@@ -45,7 +48,7 @@ export default function RenderProdutos() {
               style={styles.inputQuantidade}
               value={produto.quantidade.toString()}
               keyboardType="numeric"
-              onChangeText={(text) => handleQuantidadeChange(index, text)}
+              onChangeText={(text) => handleQuantidadeChange(produto.id, text)}
             />
           </View>
 
@@ -62,11 +65,11 @@ export default function RenderProdutos() {
   };
 
   const renderCarrinho = () => {
+    const produtosCarrinho = produtos.filter((produto) => produto.quantidade > 0);
+
     return (
       <View style={{ flex: 1 }}>
-        {produtos
-          .filter((produto) => produto.quantidade > 0) // Filtrar apenas os produtos com quantidade maior que zero
-          .map((produto, index) => renderProduto(produto, index))}
+        {produtosCarrinho.map(renderProduto)}
       </View>
     );
   };
@@ -78,32 +81,31 @@ export default function RenderProdutos() {
   return (
     <View style={{ flex: 1 }}>
       {exibirCarrinho ? (
-        renderCarrinho() 
+        renderCarrinho()
       ) : (
         <View>
-          {produtos.map((produto, index) => renderProduto(produto, index))}
+          {produtos.map(renderProduto)}
         </View>
       )}
-        <View style={styles.containerFooter}>
+      <View style={styles.containerFooter}>
         <View>
-            <Text>Faturamento total: R$ {faturamentoTotal.toFixed(2)} </Text>
-          </View>
-          <View>
-            <Text>Pedido aprovado?</Text>
-          </View>
-          <View>
-            <Text>Peso total:</Text>
-          </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleVerCarrinho}>
-              <Text style={styles.buttonText}>{exibirCarrinho ? 'Continuar Compra' : 'Ver Carrinho'}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button2}>
-              <Text style={styles.buttonText}>Fechar Pedido</Text>
-            </TouchableOpacity>
-          </View>
+          <Text>Faturamento total: R$ {faturamentoTotal.toFixed(2)}</Text>
         </View>
-          
+        <View>
+          <Text>Pedido aprovado?</Text>
+        </View>
+        <View>
+          <Text>Peso total:</Text>
+        </View>
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleVerCarrinho}>
+            <Text style={styles.buttonText}>{exibirCarrinho ? 'Continuar Compra' : 'Ver Carrinho'}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button2}>
+            <Text style={styles.buttonText}>Fechar Pedido</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
