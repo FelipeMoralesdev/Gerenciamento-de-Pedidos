@@ -12,7 +12,7 @@ export default function Body() {
   const [modalEstadoVisible, setModalEstadoVisible] = useState(false);
 
 
-  const [linhaSelecionado, setLinhaSelecionado] = useState('');;
+  const [linhaSelecionado, setLinhaSelecionado] = useState('');
   const [modalLinhaVisible, setModalLinhaVisible] = useState(false);
 
   const vendedores = [
@@ -187,7 +187,7 @@ export default function Body() {
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => {
                   setLinhaSelecionado(item.linha);
-                  setModalEstadoVisible(false);
+                  setModalLinhaVisible(false);
                 }}>
                   <Text style={styles.nomeModal}>{item.linha}</Text>
                 </TouchableOpacity>
