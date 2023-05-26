@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import produtosIniciais from '../ListProdutos';
+import Mailer from 'react-native-mail';
 
 export default function RenderProdutos() {
   const [produtos, setProdutos] = useState(produtosIniciais);
@@ -78,6 +79,32 @@ export default function RenderProdutos() {
     setExibirCarrinho(!exibirCarrinho);
   };
 
+  const handleFecharPedido = () => {
+    // Preparar o conteúdo do e-mail com a lista de produtos selecionados
+    const conteudoEmail = produtos
+      .filter((produto) => produto.quantidade > 0)
+      .map((produto) => `${produto.nome}: ${produto.quantidade}`)
+      .join('\n');
+
+    // Configurar os detalhes do e-mail
+    const mailOptions = {
+      subject: 'Pedido de Produtos', // Assunto do e-mail
+      body: conteudoEmail, // Conteúdo do e-mail
+      recipients: ['testeappfelipe@gmail.com'], // E-mails destinatários (array)
+      isHTML: false, // Define se o corpo do e-mail é HTML ou texto simples,
+    };
+
+    // Enviar o e-mail
+    Mailer.mail(mailOptions, (error, event) => {
+      if (error) {
+        console.log('Erro ao enviar e-mail:', error);
+      } else {
+        console.log('E-mail enviado com sucesso');
+      }
+    });
+  };
+  
+
   return (
     <View style={{ flex: 1 }}>
       {exibirCarrinho ? (
@@ -101,7 +128,7 @@ export default function RenderProdutos() {
           <TouchableOpacity style={styles.button} onPress={handleVerCarrinho}>
             <Text style={styles.buttonText}>{exibirCarrinho ? 'Continuar Compra' : 'Ver Carrinho'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button2}>
+          <TouchableOpacity style={styles.button2} onPress={handleFecharPedido}>
             <Text style={styles.buttonText}>Fechar Pedido</Text>
           </TouchableOpacity>
         </View>
