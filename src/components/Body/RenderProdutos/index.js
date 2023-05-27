@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import produtosIniciais from '../ListProdutos';
-import Mailer from 'react-native-mail';
+import * as MailComposer from 'expo-mail-composer';
 
 export default function RenderProdutos() {
   const [produtos, setProdutos] = useState(produtosIniciais);
@@ -85,23 +85,25 @@ export default function RenderProdutos() {
       .filter((produto) => produto.quantidade > 0)
       .map((produto) => `${produto.nome}: ${produto.quantidade}`)
       .join('\n');
-
+  
     // Configurar os detalhes do e-mail
     const mailOptions = {
       subject: 'Pedido de Produtos', // Assunto do e-mail
       body: conteudoEmail, // Conteúdo do e-mail
       recipients: ['testeappfelipe@gmail.com'], // E-mails destinatários (array)
-      isHTML: false, // Define se o corpo do e-mail é HTML ou texto simples,
     };
-
+  
     // Enviar o e-mail
-    Mailer.mail(mailOptions, (error, event) => {
-      if (error) {
-        console.log('Erro ao enviar e-mail:', error);
-      } else {
-        console.log('E-mail enviado com sucesso');
-      }
-    });
+    MailComposer.composeAsync(mailOptions)
+      .then(result => {
+        // Verificar se o e-mail foi enviado ou cancelado
+        if (result.status === 'sent') {
+          console.log('E-mail enviado com sucesso!');
+        } else if (result.status === 'cancelled') {
+          console.log('Envio de e-mail cancelado.');
+        }
+      })
+      .catch(error => console.log('Erro ao enviar e-mail:', error));
   };
   
 
