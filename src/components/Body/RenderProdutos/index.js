@@ -3,7 +3,8 @@ import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'reac
 import produtosIniciais from '../ListProdutos';
 import * as MailComposer from 'expo-mail-composer';
 
-export default function RenderProdutos() {
+
+export default function RenderProdutos(props) {
   const [produtos, setProdutos] = useState(produtosIniciais);
   const [faturamentoTotal, setFaturamentoTotal] = useState(0);
   const [exibirCarrinho, setExibirCarrinho] = useState(false);
@@ -81,10 +82,10 @@ export default function RenderProdutos() {
 
   const handleFecharPedido = () => {
     // Preparar o conteúdo do e-mail com a lista de produtos selecionados
-    const conteudoEmail = produtos
-      .filter((produto) => produto.quantidade > 0)
-      .map((produto) => `${produto.nome}: ${produto.quantidade}`)
-      .join('\n');
+    const conteudoEmail = `Vendedor: ${props.nomeSelecionado}\n\nProdutos:\n\n` + produtos
+    .filter((produto) => produto.quantidade > 0)
+    .map((produto) => `${produto.nome}: ${produto.quantidade}`)
+    .join('\n');
   
     // Configurar os detalhes do e-mail
     const mailOptions = {
