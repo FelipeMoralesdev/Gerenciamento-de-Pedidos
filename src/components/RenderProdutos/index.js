@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import produtosIniciais from '../ListProdutos';
+import produtosIniciais from '../ListProdutos'
 import * as MailComposer from 'expo-mail-composer';
 
 
