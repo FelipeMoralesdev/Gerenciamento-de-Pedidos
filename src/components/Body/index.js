@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import RenderProdutos from './../RenderProdutos'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Modal, Image } from 'react-native';
 
 export default function Body() {
   const [cliente, setCliente] = useState(''); 
   const [desconto, setDesconto] = useState('');
+  const [cnpj, setCnpj] = useState('');
+
 
   const [nomeSelecionado, setNomeSelecionado] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -85,18 +88,34 @@ export default function Body() {
 
   return (
 
+    <View>
     <View style={styles.container}>
       
       <View style={styles.linha}>
         <Text style={styles.label}>Cliente</Text>
         <TextInput
-          style={styles.input}
+          style={styles.inputDesconto}
           value={cliente}
           onChangeText={setCliente}
         />
-        <TouchableOpacity style={styles.botao}>
-        <Text style={styles.botaoTexto}>Buscar</Text>
-        </TouchableOpacity>
+      </View>
+
+      <View style={styles.linha}>
+        <Text style={styles.label}>CNPJ</Text>
+        <TextInput
+          style={styles.inputDesconto}
+          value={cnpj}
+          onChangeText={setCnpj}
+        />
+      </View>
+
+      <View style={styles.linha}>
+        <Text style={styles.label}>Desconto</Text>
+        <TextInput
+          style={styles.inputDesconto}
+          value={desconto}
+          onChangeText={setDesconto}
+        />
       </View>
 
 
@@ -166,50 +185,9 @@ export default function Body() {
       </Modal>
 
 
-
-      <View style={styles.linha}>
-        <Text style={styles.label}>Linhas</Text>
-        <TouchableOpacity style={styles.selecao} onPress={selecionarLinha}>
-          <Text style={styles.selecaoTexto}>{linhaSelecionado || 'Selecione uma linha'}</Text>
-        </TouchableOpacity>
+      
       </View>
-
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalLinhaVisible}
-        onRequestClose={fecharLinha}
-      >
-        <TouchableOpacity style={styles.modal} onPress={fecharLinha}>
-          <View style={styles.modalContainer}>
-            <FlatList
-              data={linhas}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => {
-                  setLinhaSelecionado(item.linha);
-                  setModalLinhaVisible(false);
-                }}>
-                  <Text style={styles.nomeModal}>{item.linha}</Text>
-                </TouchableOpacity>
-              )}
-              keyExtractor={(item) => item.id}
-            />
-          </View>
-        </TouchableOpacity>
-      </Modal>
-
-
-
-      <View style={styles.linha}>
-        <Text style={styles.label}>Desconto</Text>
-        <TextInput
-          style={styles.inputDesconto}
-          value={desconto}
-          onChangeText={setDesconto}
-        />
-      </View>
-
-     
+    <RenderProdutos cnpj={cnpj} cliente={cliente} nomeSelecionado={nomeSelecionado } ></RenderProdutos>
 
     </View>
 
@@ -250,7 +228,6 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginRight: 80,
   },
 
   botao: {

@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, useState } from 'react-native';
 import Header from './src/components/Header';
 import Body from './src/components/Body';
-import RenderProdutos from './src/components/RenderProdutos';
 
 
 export default function App() {
@@ -13,7 +12,6 @@ export default function App() {
       <ScrollView style={styles.scroll}>
         <Header/>
         <Body/>
-        <RenderProdutos/>
       </ScrollView>
       
 

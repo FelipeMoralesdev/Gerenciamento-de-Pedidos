@@ -82,7 +82,7 @@ export default function RenderProdutos(props) {
 
   const handleFecharPedido = () => {
     // Preparar o conteúdo do e-mail com a lista de produtos selecionados
-    const conteudoEmail = `Vendedor: ${props.nomeSelecionado}\n\nProdutos:\n\n` + produtos
+    const conteudoEmail = `Cliente: ${props.cliente}\nCNPJ: ${props.cnpj}\nVendedor: ${props.nomeSelecionado}\n\nProdutos:\n\n` + produtos
     .filter((produto) => produto.quantidade > 0)
     .map((produto) => `${produto.nome}: ${produto.quantidade}`)
     .join('\n');
